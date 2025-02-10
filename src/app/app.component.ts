@@ -1,4 +1,4 @@
-import {Component, computed, effect, ElementRef, linkedSignal, resource, signal, viewChild} from '@angular/core';
+import {Component, computed, effect, ElementRef, resource, signal, viewChild} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import {MatSlideToggle} from "@angular/material/slide-toggle";
@@ -38,17 +38,8 @@ export class AppComponent {
     this.logContainer().nativeElement.scrollTo(0, this.logContainer().nativeElement.scrollHeight)
   }
 
-  /*radioboxOptions = signal(["human", "alien", "dead matter"])
-
-  labels = ["", "hate", "neutral", "like"];
-  options = signal([' ', '', '3']);
-
-
-  choices = linkedSignal(()=>"")*/
-
-
     yolo = resource({
-      loader: async () => await new Promise((resolve, reject) => {
+      loader: async () => await new Promise((resolve) => {
         setTimeout(()=> {console.log("DONE loading resource"), resolve(2)}, 4000)
       }),
     });
@@ -106,8 +97,6 @@ export class AppComponent {
 }
 const debounceMap = new Map()
 export function debounce(callback: (...args: any[]) => void, ...args: any[]) {
-  //@ts-ignore
-  //const bla  = this
   clearTimeout(debounceMap.get(callback.name))
   console.log("Das hier wird nicht vom Input 'übernommen'. Warum?")
   debounceMap.set(callback.name,  setTimeout(callback, 1000, ...args));
