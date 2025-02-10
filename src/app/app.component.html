@@ -1,0 +1,49 @@
+<main class="main">
+  <div class="content" style="display: flex; flex-direction: column; gap: 1rem; padding: 5rem">
+    <div class="content" style="display: flex; gap: 1rem;">
+      <mat-slide-toggle [checked]="darkMode()" (change)="darkMode.set($event.checked)">Dark Mode</mat-slide-toggle>
+      <button mat-raised-button color="primary" (click)="destroy()">Remove effect</button>
+      <button mat-raised-button color="primary" (click)="SampleService.fetchData()">fetch data</button>
+      <button mat-raised-button color="primary" (click)="SampleService.data.set([])">reset data</button>
+      <button mat-raised-button color="primary" (click)="inputh='inputh'">set inputh</button>
+    </div>
+
+    <b>childModel:</b> {{ childModel() }}
+    <child [inputh]="inputh" [(childModel)]="childModel"/>
+    <div #container [@openClose]="SampleService.data().length ? 'true':'false'" style="overflow: hidden; animation: ease; transition: height .6s ease; ">
+        <!-- Keys !-->
+        <b>Signal:</b>
+        @for (user of SampleService.data(); track user) {
+        <div style="display: flex;">{{user}}</div>
+        }
+
+        <b>Computed:</b>
+        @for (user of computedData(); track user) {
+        <div style="display: flex;">{{user}}</div>
+        }
+    </div>
+
+    <!-- Was passiert wenn man dieses Fragment als erstes ausführt? !-->
+    <div #logcontainer class="logcontainer" style="overflow-y: hidden; white-space: pre; padding-top: 0; max-height: 10rem; ">{{log}}</div>
+    <form>
+      <mat-form-field>
+        <input matInput (input)="setInput($event)">
+      </mat-form-field>
+      <mat-checkbox class="example-margin" (change)="asyncData()">async checkbox</mat-checkbox>
+      <mat-form-field>
+        <input matInput (input)="debounce(setInput, $event)">
+      </mat-form-field>
+    </form>
+    Warum funktioniert das?
+    <button mat-raised-button color="primary" (click)="signalObject().active = true; signalObject().rofl = signalObject().rofl+1">set signalObject</button>
+    {{
+      signalObject().active
+    }}
+    {{
+    signalObject().rofl
+    }}
+
+    {{yolo.value()}}
+  </div>
+</main>
+<router-outlet></router-outlet>
