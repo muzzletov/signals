@@ -25,9 +25,16 @@ import {transform} from "./transform";
   ]
 })
 export class AppComponent {
-  model: { yolomaster: number; yolomasters: string[] } = {
+  model: {
+    yolomaster: number; yolomasters: string[], yoloObject: {
+      yoloobjectchildarray: string[]
+    }
+  } = {
     yolomaster: 1,
     yolomasters: [],
+    yoloObject: {
+      yoloobjectchildarray: []
+    }
   }
 
   classes = ["light", "dark"];
@@ -90,9 +97,15 @@ export class AppComponent {
       this.childModel()
       this.log += "effect: childModel changed\n"
     })
+
     effect(() => {
       const masters = this.motol._yolomasters();
       console.log(JSON.stringify(this.motol));
+    })
+
+    effect(() => {
+      const masters = this.motol.yoloObject._yoloobjectchildarray()
+      console.log("act only on sub-array changes");
     })
   }
 
