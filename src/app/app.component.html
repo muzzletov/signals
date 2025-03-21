@@ -9,16 +9,23 @@
     </div>
 
     <b>childModel:</b> {{ childModel() }}
-    <child [inputh]="inputh" [(childModel)]="childModel"/>
+    <child [inputh]="inputh" [yolo]="motol" [(childModel)]="childModel"/>
+
+    <h3>itsa</h3>
+
+    @for(master of motol.yolomasters; track $index) {
+      <div>{{master}}</div>
+    }
+
     <div #container [@openClose]="SampleService.data().length ? 'true':'false'" style="overflow: hidden; animation: ease; transition: height .6s ease; ">
         <!-- Keys !-->
         <b>Signal:</b>
-        @for (user of SampleService.data(); track user) {
+        @for (user of SampleService.data(); track $index) {
         <div style="display: flex;">{{user}}</div>
         }
 
         <b>Computed:</b>
-        @for (user of computedData(); track user) {
+        @for (user of computedData(); track $index) {
         <div style="display: flex;">{{user}}</div>
         }
     </div>

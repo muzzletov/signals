@@ -7,6 +7,7 @@ import {MatButton} from "@angular/material/button";
     selector: 'child',
     template: `
       <div style="display: flex; flex-direction: column; row-gap: 1rem">
+        <button (click)="do()">ITSA ME!</button>
         <div>
           <button mat-raised-button color="primary" (click)="childModel.set(!childModel())">propagate childModel
           </button>
@@ -20,6 +21,14 @@ import {MatButton} from "@angular/material/button";
     standalone: true
   })
 export class ChildComponent {
+  yolo = input<{
+    yolomaster: number,
+    yolomasters: string[],
+  }>()
   inputh = input("lol")
   childModel = model(false);
+
+  do() {
+    this.yolo()!.yolomasters = [...this.yolo()!.yolomasters, "ME!", "MARIO!"]
+  }
 }
