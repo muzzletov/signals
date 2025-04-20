@@ -8,7 +8,7 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
 import {ChildComponent} from "./child.component";
 import {MatFormField, MatInput} from "@angular/material/input";
 import {MatCheckbox} from "@angular/material/checkbox";
-import {transform} from "./transform";
+import {reactive} from "./transform";
 
 @Component({
   selector: 'app-root',
@@ -99,12 +99,12 @@ export class AppComponent {
     })
 
     effect(() => {
-      const masters = this.motol._yolomasters();
-      console.log(JSON.stringify(this.motol));
+      this.motol.value.$yolomasters();
+      console.log(JSON.stringify(this.motol.value));
     })
 
     effect(() => {
-      const masters = this.motol.yoloObject._yoloobjectchildarray()
+      this.motol.value.yoloObject.$yoloobjectchildarray()
       console.log("act only on sub-array changes");
     })
   }
@@ -122,7 +122,7 @@ export class AppComponent {
     this.inputh = (<HTMLInputElement>event.target).value
   }
 
-  motol = transform(this.model);
+  motol = reactive(this.model);
 }
 
 const debounceMap = new Map()

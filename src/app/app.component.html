@@ -9,11 +9,11 @@
     </div>
 
     <b>childModel:</b> {{ childModel() }}
-    <child [inputh]="inputh" [yolo]="motol" [(childModel)]="childModel"/>
+    <child [inputh]="inputh" [yolo]="motol.value" [(childModel)]="childModel"/>
 
     <h3>itsa</h3>
 
-    @for(master of motol.yolomasters; track $index) {
+    @for(master of motol.value.yolomasters; track $index) {
       <div>{{master}}</div>
     }
 
